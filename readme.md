@@ -16,7 +16,7 @@ Usually, setting a proxy in the terminal involves repetitve tasks:
 **Roxy** allow you to update your permanent config with a single command: `roxy <IP> <PORT>`.
 
 ---
-## Installation🚀
+## Installation
 
 For now you would need to already have rust to install and use it.
  - ***1. Install the binary***
@@ -41,19 +41,28 @@ For now you would need to already have rust to install and use it.
 ---
 ## Usage🛠
 
-**Set a temporary proxy(for current session only):**
-  ` roxy <IP> <PORT> `
-**Show current proxy status:**
-  `roxy --show`
-**Clear all proxy variables:**
-  `roxy --clear` or `roxy -c`
+**Set a temporary proxy(for current session only):**  
+
+  ` roxy <IP> <PORT> `  
+  
+**Show current proxy status:**  
+
+  `roxy --show`  
+  
+**Clear all proxy variables:**  
+
+  `roxy --clear` or `roxy -c`  
+  
 
 ---
 ## Available features
 
- **1.Setting a proxy for the current session***
- **2.Looking up what proxy setup is being used in this session**
- **3.Clearing or unsetting the current setup being used in this session**
+ **1.Setting a proxy for the current session**  
+ 
+ **2.Looking up what proxy setup is being used in this session**  
+ 
+ **3.Clearing or unsetting the current setup being used in this session**  
+ 
  
  ---
 
@@ -67,7 +76,8 @@ For now you would need to already have rust to install and use it.
    -  **Health Check**: Ping a URL through the proxy to verify its actually working before setting it.
    
 ## Built with🏗
-  -**Rust**
+  -**Rust**  
+  
   -**Clap**
 
 ---
