@@ -9,17 +9,23 @@ struct Cli{
 	persist:bool,
 	
 	#[arg(short, long)]
-	clear:bool
+	clear:bool,
+	
+	#[arg(long)]
+	show:bool
 }
 
 fn main(){
 	let args = Cli::parse();
 	
 	if args.clear{
-		print!("unset http_proxy; unset https_proxy;");
+		print!("echo \"Proxy unset for this session\"; unset http_proxy; unset https_proxy;");
 	}
 	else if let( Some(ip), Some(port)) = (args.ip, args.port){
 		let proxy_str = format!("http://{}:{}", ip, port);
-		print!("export http_proxy=\"{}\"; export https_proxy=\"{}\";", proxy_str, proxy_str);
+		print!("echo \"proxy updated for this session\"; export http_proxy=\"{}\"; export https_proxy=\"{}\";", proxy_str, proxy_str);
+	}
+	else if args.show{
+		print!("echo \"The current proxy setup:\"; echo \"http_proxy = \" {}; echo \"https_proxy = \" {};", "${http_proxy}", "${https_proxy}");
 	}
 }
