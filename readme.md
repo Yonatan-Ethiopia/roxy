@@ -21,20 +21,13 @@ Usually, setting a proxy in the terminal involves repetitve tasks:
 For now you would need to already have rust to install and use it.
  - ***1. Install the binary***
     `cargo install --git https://github.com/YOUR_USERNAME/roxy`
- - ***2.Add the Shell Wrapper**
+ - **2.Add the Shell Wrapper**
      Add this snippet to the bottom of your `~/.bashrc` (or `~/.zshrc` if you use Zsh):
-     `roxy() {
+     `roxy(){
         local output
-        output=$( command roxy "$@")
-
-        if [[ "$*" == *"--persist"* ]]; then
-            echo "Coming soon"
-        elif [[ "$*" == *"--show"* ]]; then
-            eval "$output"
-        else 
-            eval "$output"
-        fi
-      }`
+        output=$(command roxy "$@")
+        eval "$output"
+       }`
  - ***3.Refresh your shell***
     `source ~/.bashrc`
 
