@@ -53,6 +53,13 @@ For now you would need to already have rust to install and use it.
 
   `roxy --clear` or `roxy -c`  
   
+**Save proxy setting globally in `.bashrc` file**  
+
+  `roxy --persist <IP> <PORT>`  
+  
+**Remove proxy settings from `.bashrc` file**  
+  `roxy --persist --clear`  
+  
 
 ---
 ## Available features
@@ -63,13 +70,16 @@ For now you would need to already have rust to install and use it.
  
  **3.Clearing or unsetting the current setup being used in this session**  
  
+ **4.Setting a proxy globally in `.bashrc` file**  
+ 
+ **5.Removing proxy settings from `.bashrc` file**  
+ 
  
  ---
 
 ## Roadmap( Upcoming Features)
 
  I am actively working on expanding Roxy to be a universal proxy manager:
-   - **--persist** : Automatically update your `.bashrc` / `.zshrc` with a managed Roxy block.
    - **SOCKS% Support**: Support for `ALL_PROXY` and SOCKS configuraions.
    - **SSH Config Integration**: Easily toggle proxies for you SSH config files.
    - **Profile Management**: Save presets like `roxy --save home` or `roxy --load work` . 
