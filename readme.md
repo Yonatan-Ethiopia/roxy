@@ -24,9 +24,12 @@ For now you would need to already have rust to install and use it.
  - **2.Add the Shell Wrapper**
      Add this snippet to the bottom of your `~/.bashrc` (or `~/.zshrc` if you use Zsh):
      `roxy() {  
-	     local output  
-         output=$(command roxy "$@")  
-         eval "$output"  
+	     local output
+     
+         output=$(command roxy "$@")
+    
+         eval "$output"
+    
      } `
  - **3.Refresh your shell**
     `source ~/.bashrc`
