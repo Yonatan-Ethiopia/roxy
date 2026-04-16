@@ -52,7 +52,10 @@ For now you would need to already have rust to install and use it.
   
 **Remove proxy settings from `.bashrc` file**  
   `roxy --persist --clear`  
-  
+
+**Check for your current internet speed:**  
+  `roxy --speed`  
+    
 
 ---
 ## Available features
@@ -66,6 +69,8 @@ For now you would need to already have rust to install and use it.
  **4.Setting a proxy globally in `.bashrc` file**  
  
  **5.Removing proxy settings from `.bashrc` file**  
+ 
+ **6.Checking your internet speed**  
  
  
  ---

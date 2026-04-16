@@ -1,6 +1,11 @@
 use clap::Parser;
 use std::fs;
 use regex::Regex;
+use reqwest;
+use std::time::Instant;
+use indicatif::{ProgressBar, ProgressStyle};
+use std::io::{self, Read};
+
 #[derive(Parser)]
 struct Cli{
 	ip: Option<String>,
@@ -13,7 +18,10 @@ struct Cli{
 	clear:bool,
 	
 	#[arg(long)]
-	show:bool
+	show:bool,
+	
+	#[arg(long)]
+	speed:bool
 }
 fn reg_check(proxy_str: String){
 	let start = Regex::new(r"#ROXY_START").unwrap();
@@ -68,6 +76,50 @@ fn file_upd( content: String)-> Result<(), std::io::Error>{
 	Ok(())
 }
 
+fn speed_check(){
+	let url = "https://speed.cloudflare.com/__down?bytes=5242880";
+	let start = std::time::Instant::now();
+	let client = reqwest::blocking::Client::builder().timeout(std::time::Duration::from_secs(30)).build().unwrap();
+	let mut response = match client.get(url).send(){
+		Ok(res) => res,
+		Err(_) => {eprintln!("Failed "); return; }
+	};
+	
+	let total_size = response.content_length().unwrap_or(5242880);
+	
+	let pb = ProgressBar::new(total_size);
+    pb.set_style(ProgressStyle::default_bar()
+    .template("{spinner:5.white} {msg}")
+    .unwrap()
+    .tick_strings(&[
+        "▰▱▱▱▱",
+        "▰▰▱▱▱",
+        "▰▰▰▱▱",
+        "▰▰▰▰▱",
+        "▰▰▰▰▰",
+    ])
+    .progress_chars("#>-"));
+    
+    let mut buffer = [0; 8192];
+    let mut downloaded = 0;
+    
+    while let Ok(n) = response.read(&mut buffer){
+		if n == 0 {break;}
+		downloaded += n as u64;
+		pb.set_position(downloaded);
+		let elapsed = start.elapsed().as_secs_f64();
+		if elapsed > 0.0 {
+    let current_speed = (downloaded as f64 * 8.0) / (1_000_000.0 * elapsed);
+    pb.set_message(format!("Analysing speed {:.2} Mbps", current_speed));
+}
+		
+	}
+    pb.finish_with_message("Analysis complete");
+    
+	let duration = start.elapsed();
+    let speed = (downloaded as f64 * 8.0 ) / (1_000_000.0 * duration.as_secs_f64());
+    println!("echo \"\n Your Internet Speed is {:.2} Mbps\"", speed);
+}
 fn main(){
 	let args = Cli::parse();
 	
@@ -88,6 +140,9 @@ fn main(){
 	}
 	else if args.show{
 		print!("echo \"The current proxy setup:\"; echo \"http_proxy = \" {}; echo \"https_proxy = \" {};", "${http_proxy}", "${https_proxy}");
+	}
+	else if args.speed{
+		let _ = speed_check();
 	}
 
 }
