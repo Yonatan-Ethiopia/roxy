@@ -89,7 +89,7 @@ fn speed_check(){
 	
 	let pb = ProgressBar::new(total_size);
     pb.set_style(ProgressStyle::default_bar()
-    .template("{spinner:5.white} {msg}")
+    .template("{spinner:5.cyan.bold} {msg}")
     .unwrap()
     .tick_strings(&[
         "▰▱▱▱▱",
