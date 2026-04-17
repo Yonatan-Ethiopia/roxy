@@ -2,24 +2,25 @@ use clap::Parser;
 use std::fs;
 use regex::Regex;
 use reqwest;
-use std::time::Instant;
 use indicatif::{ProgressBar, ProgressStyle};
-use std::io::{self, Read};
+use std::io::Read;
 
 #[derive(Parser)]
 struct Cli{
+	/// The IP address of the proxy server
 	ip: Option<String>,
+	/// The port of the proxy server
 	port: Option<String>,
-	
+	///  Make the proxy settings persist in your .bashrc file
 	#[arg(short, long)]
 	persist:bool,
-	
+	/// Unset the current proxy variables 
 	#[arg(short, long)]
 	clear:bool,
-	
+	/// Show current proxy enviroment variables 
 	#[arg(long)]
 	show:bool,
-	
+	/// Check your current internet speed
 	#[arg(long)]
 	speed:bool
 }
@@ -59,7 +60,9 @@ fn clear_bash(){
 				}
 				let new_con = format!("$1\n\n$2\n");
 				let result = re.replace_all(&content, new_con);
-				let _ = file_upd(result.into_owned());
+				if let Err(e) = file_upd(result.into_owned()) {
+					eprintln!("Failed to update file: {}", e);
+				}
 			}
 			Err(e)=>{
 				print!("Sorry the following error occured:\n {}", e);
@@ -72,7 +75,7 @@ fn file_upd( content: String)-> Result<(), std::io::Error>{
 		let bash_path = home.join(".bashrc");
 		std::fs::copy(&bash_path, format!("{}.bak", bash_path.display()))?;
 
-		let _ = fs::write(&bash_path, content);
+		std::fs::write(&bash_path, content)?;
 		print!("source ~/.bashrc");
 	}
 	Ok(())

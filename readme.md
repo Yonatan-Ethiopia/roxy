@@ -18,18 +18,40 @@ Usually, setting a proxy in the terminal involves repetitve tasks:
 ---
 ## Installation
 
-For now you would need to already have rust to install and use it.
+### 1) If you already have rust and cargo set up use this :  
  - ***1. Install the binary***
-    `cargo install --git https://github.com/YOUR_USERNAME/roxy`
+    `cargo install --git https://github.com/Yonatan-Ethiopia/roxy`
  - **2.Add the Shell Wrapper**
      Add this snippet to the bottom of your `~/.bashrc` (or `~/.zshrc` if you use Zsh):
-     `roxy() {
-	    local output
+     `roxy(){
+        local output
         output=$(command roxy "$@")
-        eval "$output"
-     } `
+        if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+            echo "$output"
+        else 
+            eval "$output"
+        fi
+    }`
  - **3.Refresh your shell**
-    `source ~/.bashrc`
+    `source ~/.bashrc`  
+    
+### 2) If you want to directly download the binary file follow this:
+  - **1. Install the binary from** [https://github.com/Yonatan-Ethiopia/roxy/releases/tag/v0.1.0]  
+  
+  - **2. Make roxy executable**  
+      `chmod +x roxy`  
+      `sudo mv roxy /usr/local/bin/`  
+  
+  - **3. Add the Shell Wrapper like in the first option**
+    `roxy(){
+        local output
+        output=$(command roxy "$@")
+        if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+            echo "$output"
+        else 
+            eval "$output"
+        fi
+     }`  
 
 ---
 ## Usage🛠
@@ -66,7 +88,7 @@ For now you would need to already have rust to install and use it.
  
  **3.Clearing or unsetting the current setup being used in this session**  
  
- **4.Setting a proxy globally in `.bashrc` file**  
+ **4.Setting a proxy globally in `.bashrc` file(It will keep a backup of your bashrc file in ~/.bashrc.bak incase something goes wrong)**  
  
  **5.Removing proxy settings from `.bashrc` file**  
  
@@ -81,7 +103,8 @@ For now you would need to already have rust to install and use it.
    - **SOCKS% Support**: Support for `ALL_PROXY` and SOCKS configuraions.
    - **SSH Config Integration**: Easily toggle proxies for you SSH config files.
    - **Profile Management**: Save presets like `roxy --save home` or `roxy --load work` . 
-   -  **Health Check**: Ping a URL through the proxy to verify its actually working before setting it.
+   -  **Health Check**: Ping a URL through the proxy to verify its actually working before setting it.  
+   - **Support for zsh files**
    
 ## Built with🏗
   -**Rust**  
