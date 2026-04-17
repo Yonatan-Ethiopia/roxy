@@ -70,6 +70,8 @@ fn clear_bash(){
 fn file_upd( content: String)-> Result<(), std::io::Error>{
 	if let Some(home) = home::home_dir(){
 		let bash_path = home.join(".bashrc");
+		std::fs::copy(&bash_path, format!("{}.bak", bash_path.display()))?;
+
 		let _ = fs::write(&bash_path, content);
 		print!("source ~/.bashrc");
 	}
