@@ -22,7 +22,7 @@ Usually, setting a proxy in the terminal involves repetitve tasks:
  - ***1. Install the binary***
     `cargo install --git https://github.com/Yonatan-Ethiopia/roxy`
  - **2.Add the Shell Wrapper**
-     Add this snippet to the bottom of your `~/.bashrc` (or `~/.zshrc` if you use Zsh):  
+     Add this snippet to the bottom of your `~/.bashrc`:  
      ```
      roxy(){
         local output
