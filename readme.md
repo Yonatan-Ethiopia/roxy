@@ -22,8 +22,9 @@ Usually, setting a proxy in the terminal involves repetitve tasks:
  - ***1. Install the binary***
     `cargo install --git https://github.com/Yonatan-Ethiopia/roxy`
  - **2.Add the Shell Wrapper**
-     Add this snippet to the bottom of your `~/.bashrc` (or `~/.zshrc` if you use Zsh):
-     `roxy(){
+     Add this snippet to the bottom of your `~/.bashrc` (or `~/.zshrc` if you use Zsh):  
+     ```
+     roxy(){
         local output
         output=$(command roxy "$@")
         if [[ "$1" == "--help" || "$1" == "-h" ]]; then
@@ -31,19 +32,30 @@ Usually, setting a proxy in the terminal involves repetitve tasks:
         else 
             eval "$output"
         fi
-    }`
+    }
+     ```
  - **3.Refresh your shell**
     `source ~/.bashrc`  
     
-### 2) If you want to directly download the binary file follow this:
-  - **1. Install the binary from** [https://github.com/Yonatan-Ethiopia/roxy/releases/tag/v0.1.0]  
+### 2) If dont have rust and cargo setup and you want to directly download the binary file follow this:
+  - **1. Install the binary from** https://github.com/Yonatan-Ethiopia/roxy/releases/tag/v0.1.0 
   
   - **2. Make roxy executable**  
-      `chmod +x roxy`  
-      `sudo mv roxy /usr/local/bin/`  
+     Do as below.  
+      ```
+      # Go to where you downloaded it
+      cd ~/Downloads
+
+      # Make it executable
+      chmod +x roxy
+
+      # Move it to a global location
+      sudo mv roxy /usr/local/bin/
+      ``` 
   
-  - **3. Add the Shell Wrapper like in the first option**
-    `roxy(){
+  - **3. Add the Shell Wrapper like in the first option**  
+    ```
+    roxy(){
         local output
         output=$(command roxy "$@")
         if [[ "$1" == "--help" || "$1" == "-h" ]]; then
@@ -51,7 +63,8 @@ Usually, setting a proxy in the terminal involves repetitve tasks:
         else 
             eval "$output"
         fi
-     }`  
+     }
+    ```  
 
 ---
 ## Usage🛠
