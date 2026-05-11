@@ -90,7 +90,12 @@ Usually, setting a proxy in the terminal involves repetitve tasks:
 
 **Check for your current internet speed:**  
   `roxy --speed`  
-    
+
+---  
+
+## Live Usage
+
+![Alt Text](show/roxy.gif)   
 
 ---
 ## Available features
