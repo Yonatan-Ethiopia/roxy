@@ -118,7 +118,7 @@ Usually, setting a proxy in the terminal involves repetitve tasks:
 ## Roadmap( Upcoming Features)
 
  I am actively working on expanding Roxy to be a universal proxy manager:
-   - **SOCKS% Support**: Support for `ALL_PROXY` and SOCKS configuraions.
+   - **SOCKS5 Support**: Support for `ALL_PROXY` and SOCKS configurations.
    - **SSH Config Integration**: Easily toggle proxies for you SSH config files.
    - **Profile Management**: Save presets like `roxy --save home` or `roxy --load work` . 
    -  **Health Check**: Ping a URL through the proxy to verify its actually working before setting it.  
